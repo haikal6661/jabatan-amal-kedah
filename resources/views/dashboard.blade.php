@@ -385,7 +385,7 @@
                   <th>Kemaskini</th>
                 </thead>
                 <tbody>
-                  @if (count($new_member) > 1)
+                  @if (count($new_member) > 0)
                   @foreach ($new_member as $key => $member)
                   <tr>
                     <td>{{$key+1}}</td>
