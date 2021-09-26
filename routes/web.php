@@ -1,0 +1,79 @@
+<?php
+
+use App\Http\Controllers\MemberController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+
+Auth::routes();
+
+// Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
+
+
+Route::group(['middleware' => 'auth'], function () {
+	// Route::get('/', function () {
+	// 	return view('dashboard');
+	// });
+	Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+	Route::get('table-list', function () {
+		return view('pages.table_list');
+	})->name('table');
+
+	Route::get('typography', function () {
+		return view('pages.typography');
+	})->name('typography');
+
+	Route::get('icons', function () {
+		return view('pages.icons');
+	})->name('icons'); 
+
+	Route::get('map', function () {
+		return view('pages.map');
+	})->name('map');
+
+	Route::get('notifications', function () {
+		return view('pages.notifications');
+	})->name('notifications');
+
+	Route::get('rtl-support', function () {
+		return view('pages.language');
+	})->name('language');
+
+	Route::get('upgrade', function () {
+		return view('pages.upgrade');
+	})->name('upgrade');
+
+	Route::get('/tambah_ahli',[MemberController::class, 'create'] );
+	Route::post('/tambah_ahli',[MemberController::class, 'store'] );
+	Route::get('member',[MemberController::class, 'index']);
+	Route::get('/edit_ahli/{id}',[MemberController::class, 'edit']);
+	Route::get('/view_ahli/{id}',[MemberController::class, 'show']);
+	Route::post('/update/{id}',[MemberController::class, 'update']);
+	Route::get('delete/{id}',[MemberController::class, 'destroy']);
+	Route::get('member',[MemberController::class, 'search']);
+	Route::get('daftar','App\Http\Controllers\PenggunaController@create')->name('daftar');
+	Route::post('daftar','App\Http\Controllers\PenggunaController@store');
+	Route::get('senarai_pengguna','App\Http\Controllers\PenggunaController@index')->name('senarai-pengguna');
+	Route::get('/edit_pengguna/{id}','App\Http\Controllers\PenggunaController@edit')->name('edit-pengguna');
+	Route::post('/update/{id}','App\Http\Controllers\PenggunaController@update')->name('update-pengguna');
+	Route::get('delete_pengguna/{id}','App\Http\Controllers\PenggunaController@destroy');
+	// Route::get('/',[HomeController::class, 'ahlibaru']);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
+	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
+	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+});
+
