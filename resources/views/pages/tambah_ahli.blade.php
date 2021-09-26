@@ -40,13 +40,13 @@
                     <div class="col">
                         <div class="form-group">
                         <label for="no_ic">No. Kad Pengenalan:</label>
-                      <input type="text" class="form-control" name="no_ic" placeholder="e.g 890603025457" required>
+                      <input type="number" class="form-control" name="no_ic" placeholder="e.g 890603025457" required>
                       </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                         <label for="umur">Umur:</label>
-                      <input type="text" class="form-control" name="umur" placeholder="">
+                      <input type="number" class="form-control" name="umur" placeholder="" required>
                         </div>
                     </div>
                   </div>

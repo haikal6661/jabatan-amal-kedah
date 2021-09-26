@@ -78,7 +78,7 @@
                               </div>
                               @if ($errors->has('password_confirmation'))
                                 <div id="password_confirmation-error" class="error text-danger pl-3" for="password_confirmation" style="display: block;">
-                                  <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                  <strong>{{ $errors->first('password_confirmation') }}</strong> 
                                 </div>
                               @endif
                             </div>
