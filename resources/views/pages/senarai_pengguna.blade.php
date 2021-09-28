@@ -24,6 +24,7 @@
                     <th>No.</th>
                     <th>Nama</th>
                     <th>Emel</th>
+                    <th>Peranan</th>
                     <th style="text-align: center">Action</th>
                   </thead>
                   <tbody>
@@ -32,6 +33,11 @@
                       <td>{{$key+1}}</td>
                       <td>{{$user->name}}</td>
                       <td>{{$user->email}}</td>
+                      <td>
+                        @foreach($user->getRoleNames() as $role)
+                        <label style="font-size: 100%" class="badge badge-success">{{ucfirst($role)}}</label>
+                        @endforeach
+                      </td>
                       <td style="text-align: center;width:20%;"><a href="{{url('edit_pengguna/'.$user['id'])}}" class="btn btn-success btn-sm" role="button" title="Edit"><img src="{{asset('storage/pencil-fill.svg')}}" alt="Edit"></a>
                         {{-- <a href="{{url('view_ahli/'.$user['id'])}}" class="btn btn-info btn-sm" role="button" title="View"><img src="{{asset('storage/eye-fill.svg')}}" alt="View"></a> --}}
                         <a href="{{url('delete_pengguna/'.$user['id'])}}" onclick="return confirm('Adakah anda pasti untuk memadam data ini?')" class="btn btn-danger btn-sm" role="button" title="Delete"><img src="{{asset('storage/trash-fill.svg')}}" alt="Delete"></a></td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\KodKawasan;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
 {
