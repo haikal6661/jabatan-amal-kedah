@@ -53,20 +53,23 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.upgrade');
 	})->name('upgrade');
 
-	Route::get('/tambah_ahli',[MemberController::class, 'create'] );
-	Route::post('/tambah_ahli',[MemberController::class, 'store'] );
+	Route::group(['middleware' => ['role:admin|admin_kawasan']], function(){
+		Route::get('/edit_ahli/{id}',[MemberController::class, 'edit']);
+		Route::post('/update/{id}',[MemberController::class, 'update']);
+		Route::get('/tambah_ahli',[MemberController::class, 'create'] );
+		Route::post('/tambah_ahli',[MemberController::class, 'store'] );
+		Route::get('delete/{id}',[MemberController::class, 'destroy']);
+		Route::get('daftar','App\Http\Controllers\PenggunaController@create')->name('daftar');
+		Route::post('daftar','App\Http\Controllers\PenggunaController@store');
+		Route::get('senarai_pengguna','App\Http\Controllers\PenggunaController@index')->name('senarai-pengguna');
+		Route::get('/edit_pengguna/{id}','App\Http\Controllers\PenggunaController@edit')->name('edit-pengguna');
+		Route::post('/update/{id}','App\Http\Controllers\PenggunaController@update')->name('update-pengguna');
+		Route::get('delete_pengguna/{id}','App\Http\Controllers\PenggunaController@destroy');
+	});
+
 	Route::get('member',[MemberController::class, 'index']);
-	Route::get('/edit_ahli/{id}',[MemberController::class, 'edit']);
 	Route::get('/view_ahli/{id}',[MemberController::class, 'show']);
-	Route::post('/update/{id}',[MemberController::class, 'update']);
-	Route::get('delete/{id}',[MemberController::class, 'destroy']);
 	Route::get('member',[MemberController::class, 'search']);
-	Route::get('daftar','App\Http\Controllers\PenggunaController@create')->name('daftar');
-	Route::post('daftar','App\Http\Controllers\PenggunaController@store');
-	Route::get('senarai_pengguna','App\Http\Controllers\PenggunaController@index')->name('senarai-pengguna');
-	Route::get('/edit_pengguna/{id}','App\Http\Controllers\PenggunaController@edit')->name('edit-pengguna');
-	Route::post('/update/{id}','App\Http\Controllers\PenggunaController@update')->name('update-pengguna');
-	Route::get('delete_pengguna/{id}','App\Http\Controllers\PenggunaController@destroy');
 	// Route::get('/',[HomeController::class, 'ahlibaru']);
 });
 

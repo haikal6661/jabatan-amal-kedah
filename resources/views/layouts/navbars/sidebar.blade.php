@@ -24,6 +24,7 @@
         </a>
       <div class="collapse show"  id="laravelExample">
         <ul class="nav">
+          @role('admin|admin_kawasan')
           <li class="nav-item{{ $activePage == 'daftar' ? ' active' : '' }}">
             <a class="nav-link" href="{{ route('daftar') }}">
               <i class="material-icons"><img style="vertical-align:text-top; width:23px;" src="{{ asset('material') }}/img/user-male-black-shape-with-plus-sign.svg"></i>
@@ -42,6 +43,14 @@
               <span class="sidebar-normal">{{ __('Profil Pengguna') }} </span>
             </a>
           </li>
+          @else 
+          <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('profile.edit') }}">
+              <i><img style="vertical-align:text-top; width:25px;" src="{{ asset('material') }}/img/account-cog.png"></i>
+              <span class="sidebar-normal">{{ __('Profil Pengguna') }} </span>
+            </a>
+          </li>
+          @endrole
         </ul>
       </div>
       <li class="nav-item {{ ($activePage == 'tambah-ahli' || $activePage == 'user-management') ? ' active' : '' }}">
@@ -53,6 +62,7 @@
         </a>
         <div class="collapse show" id="laravelExample2">
           <ul class="nav">
+            @role('admin|admin_kawasan')
             <li class="nav-item{{ $activePage == 'tambah-ahli' ? ' active' : '' }}">
               <a class="nav-link" href="{{ url('/tambah_ahli') }}">
                 <i><img style="vertical-align:text-top; width:25px;" src="{{ asset('material') }}/img/user-male-black-shape-with-plus-sign.svg"></i>
@@ -65,6 +75,14 @@
                 <span class="sidebar-normal"> {{ __('Pengurusan Ahli') }} </span>
               </a>
             </li>
+            @else 
+            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{url('/member')}}">
+                <i><img style="vertical-align:text-top; width:25px;" src="{{ asset('material') }}/img/format-list-bulleted.png"></i>
+                <span class="sidebar-normal"> {{ __('Senarai Ahli') }} </span>
+              </a>
+            </li>
+            @endrole
           </ul>
         </div>
       </li>
