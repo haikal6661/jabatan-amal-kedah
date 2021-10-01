@@ -24,7 +24,7 @@
         </a>
       <div class="collapse show"  id="laravelExample">
         <ul class="nav">
-          @role('admin|admin_kawasan')
+          @role('Admin')
           <li class="nav-item{{ $activePage == 'daftar' ? ' active' : '' }}">
             <a class="nav-link" href="{{ route('daftar') }}">
               <i class="material-icons"><img style="vertical-align:text-top; width:23px;" src="{{ asset('material') }}/img/user-male-black-shape-with-plus-sign.svg"></i>
@@ -62,7 +62,7 @@
         </a>
         <div class="collapse show" id="laravelExample2">
           <ul class="nav">
-            @role('admin|admin_kawasan')
+            @role('Admin|Admin_Kawasan')
             <li class="nav-item{{ $activePage == 'tambah-ahli' ? ' active' : '' }}">
               <a class="nav-link" href="{{ url('/tambah_ahli') }}">
                 <i><img style="vertical-align:text-top; width:25px;" src="{{ asset('material') }}/img/user-male-black-shape-with-plus-sign.svg"></i>

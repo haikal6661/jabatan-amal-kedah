@@ -53,12 +53,13 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.upgrade');
 	})->name('upgrade');
 
-	Route::group(['middleware' => ['role:admin|admin_kawasan']], function(){
+	Route::group(['middleware' => ['role:Admin']], function(){
 		Route::get('/edit_ahli/{id}',[MemberController::class, 'edit']);
 		Route::post('/update/{id}',[MemberController::class, 'update']);
 		Route::get('/tambah_ahli',[MemberController::class, 'create'] );
 		Route::post('/tambah_ahli',[MemberController::class, 'store'] );
 		Route::get('delete/{id}',[MemberController::class, 'destroy']);
+		Route::get('member',[MemberController::class, 'index']);
 		Route::get('daftar','App\Http\Controllers\PenggunaController@create')->name('daftar');
 		Route::post('daftar','App\Http\Controllers\PenggunaController@store');
 		Route::get('senarai_pengguna','App\Http\Controllers\PenggunaController@index')->name('senarai-pengguna');
@@ -67,9 +68,19 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('delete_pengguna/{id}','App\Http\Controllers\PenggunaController@destroy');
 	});
 
-	Route::get('member',[MemberController::class, 'index']);
-	Route::get('/view_ahli/{id}',[MemberController::class, 'show']);
-	Route::get('member',[MemberController::class, 'search']);
+	Route::group(['middleware' => ['role:Admin|Admin_Kawasan']], function(){
+		Route::get('/edit_ahli/{id}',[MemberController::class, 'edit']);
+		Route::post('/update/{id}',[MemberController::class, 'update']);
+		Route::get('/tambah_ahli',[MemberController::class, 'create'] );
+		Route::post('/tambah_ahli',[MemberController::class, 'store'] );
+		Route::get('member',[MemberController::class, 'index']);
+		Route::get('/view_ahli/{id}',[MemberController::class, 'show']);
+		// Route::get('member',[MemberController::class, 'search']);
+	});
+
+	// Route::get('member',[MemberController::class, 'index']);
+	// Route::get('/view_ahli/{id}',[MemberController::class, 'show']);
+	// Route::get('member',[MemberController::class, 'search']);
 	// Route::get('/',[HomeController::class, 'ahlibaru']);
 });
 

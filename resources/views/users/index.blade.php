@@ -16,7 +16,7 @@
             </div>
             @endif
           <div class="card-body">
-            @role('admin|admin_kawasan')
+            @role('Admin|Admin_Kawasan')
             <a href="{{url('/tambah_ahli')}}" class="btn btn-success" role="button" style="float: right;">Tambah ahli</a>
             @endrole
             <div class="table-responsive">
@@ -38,7 +38,7 @@
                     <td>{{$member->kodKawasan->kod_kawasan}}</td>
                     <td>{{$member['no_hp']}}</td>
                     <td>{{$member['no_ahli_pas']}}</td>
-                    @role('admin|admin_kawasan')
+                    @role('Admin|Admin_Kawasan')
                     <td style="text-align: center;width:20%;"><a href="{{url('edit_ahli/'.$member['id'])}}" class="btn btn-success btn-sm" role="button" title="Edit"><img src="{{asset('storage/pencil-fill.svg')}}" alt="Edit"></a>
                       <a href="{{url('view_ahli/'.$member['id'])}}" class="btn btn-info btn-sm" role="button" title="View"><img src="{{asset('storage/eye-fill.svg')}}" alt="View"></a>
                       <a href="{{url('delete/'.$member['id'])}}" onclick="return confirm('Adakah anda pasti untuk memadam data ini?')" class="btn btn-danger btn-sm" role="button" title="Delete"><img src="{{asset('storage/trash-fill.svg')}}" alt="Delete"></a></td>

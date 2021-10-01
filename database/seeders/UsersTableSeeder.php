@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
     {
         User::updateOrCreate([
             
+            'kod_kawasans_id' => '1',
             'name' => 'Super Admin',
             'email' => 'haikal.ariff13@gmail.com',
             'email_verified_at' => now(),

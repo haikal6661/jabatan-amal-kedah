@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\KodKawasan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
 {
@@ -15,10 +16,18 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $data = Member::paginate(10);
+        if (Auth::user()->hasRole('Admin')) {
+            $data = Member::where('id', '!=', null)->paginate(10);
+            
+        }
+        else{
+            $data = Member::where('kod_kawasans_id', [Auth::user()->kod_kawasans_id])->paginate(10);
+        }
+        
+        // dd($data);
 
-        //dd($data[0]->kodKawasan);
-        // $kawasan = KodKawasan::all();
+        // //dd($data[0]->kodKawasan);
+        // // $kawasan = KodKawasan::all();
         return view('users.index',['members'=>$data]);
     }
 

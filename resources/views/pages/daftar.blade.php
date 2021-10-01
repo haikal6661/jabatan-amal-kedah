@@ -52,6 +52,21 @@
                                 </div>
                               @endif
                             </div>
+                            <div class="bmd-form-group mt-3">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="material-icons">place</i>
+                                  </span>
+                                </div>
+                                <select class="form-control" data-style="btn btn-link" title="Pilih Kawasan..." name="kod_kawasan" required>
+                                  <option value="">Pilih Kawasan...</option>
+                                  @foreach ($kod_kawasan as $kawasan)
+                                  <option value="{{$kawasan->id}}">{{$kawasan->kod_kawasan}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
                             <div class="bmd-form-group{{ $errors->has('password') ? ' has-danger' : '' }} mt-3">
                               <div class="input-group">
                                 <div class="input-group-prepend">

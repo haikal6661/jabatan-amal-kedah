@@ -26,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // auth()->user()->assignRole('Admin_Kawasan');
         $total_member = Member::all();
         $new_member = Member::orderBy('id','desc')->paginate(5);
         $total_kawasan = KodKawasan::all();

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\KodKawasan;
 
 class PenggunaController extends Controller
 {
@@ -30,7 +31,9 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        return view('pages.daftar');
+        $kod_kawasan = KodKawasan::all();
+
+        return view('pages.daftar')->with(compact('kod_kawasan'));
     }
 
     /**
@@ -46,11 +49,15 @@ class PenggunaController extends Controller
                             'email'=>'required', 'string', 'email', 'max:255', 'unique:users',
                             'password'=>'required', 'string', 'min:8', 'confirmed']);
 
+
                             $user = User::create([
                                 'name' => $request['name'],
                                 'email' => $request['email'],
                                 'password' => Hash::make($request['password']),
+                                'kod_kawasans_id' => $request['kod_kawasan'],
+
                             ]);
+                            // $user->assignRole('Admin_Kawasan');
 
                             return redirect('/daftar')->with('status', 'Pengguna telah ditambah.');
     }
