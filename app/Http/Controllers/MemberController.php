@@ -17,7 +17,7 @@ class MemberController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('Admin')) {
-            $data = Member::where('id', '!=', null)->paginate(10);
+            $data = Member::paginate(10);
             
         }
         else{
