@@ -43,7 +43,8 @@
               <span class="sidebar-normal">{{ __('Profil Pengguna') }} </span>
             </a>
           </li>
-          @else 
+          @endrole
+          @role('Admin_Kawasan')
           <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
             <a class="nav-link" href="{{ route('profile.edit') }}">
               <i><img style="vertical-align:text-top; width:25px;" src="{{ asset('material') }}/img/account-cog.png"></i>
