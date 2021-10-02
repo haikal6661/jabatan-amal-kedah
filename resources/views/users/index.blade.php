@@ -7,7 +7,11 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
+            @role('Admin_Kawasan')
+            <h4 class="card-title ">Senarai Ahli Bagi Kawasan ({{Auth::user()->kodKawasanUser->kod_kawasan}})</h4>
+            @elserole('Admin|Guest')
             <h4 class="card-title ">Senarai Ahli</h4>
+            @endrole
             <p class="card-category"> Kemaskini data ahli di sini.</p>
           </div>
           @if (session('status'))
