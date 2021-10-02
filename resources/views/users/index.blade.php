@@ -72,7 +72,6 @@
 
               {{$members->links('pagination::bootstrap-4')}}
 
-
             </ul>
           </nav>
         </div>
