@@ -71,6 +71,7 @@
             <ul class="pagination justify-content-center">
 
               {{$members->links('pagination::bootstrap-4')}}
+              
 
             </ul>
           </nav>
