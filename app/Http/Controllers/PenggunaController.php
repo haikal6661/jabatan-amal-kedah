@@ -57,7 +57,7 @@ class PenggunaController extends Controller
                                 'kod_kawasans_id' => $request['kod_kawasan'],
 
                             ]);
-                            // $user->assignRole('Admin_Kawasan');
+                            // $user->assignRole('Admin');
 
                             return redirect('/daftar')->with('status', 'Pengguna telah ditambah.');
     }

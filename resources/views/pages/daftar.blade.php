@@ -59,7 +59,7 @@
                                     <i class="material-icons">place</i>
                                   </span>
                                 </div>
-                                <select class="form-control" data-style="btn btn-link" title="Pilih Kawasan..." name="kod_kawasan" required>
+                                <select class="form-control" data-style="btn btn-link" title="Pilih Kawasan..." name="kod_kawasan">
                                   <option value="">Pilih Kawasan...</option>
                                   @foreach ($kod_kawasan as $kawasan)
                                   <option value="{{$kawasan->id}}">{{$kawasan->kod_kawasan}}</option>
