@@ -75,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/tambah_ahli',[MemberController::class, 'store'] );
 		Route::get('member',[MemberController::class, 'index']);
 		Route::get('/view_ahli/{id}',[MemberController::class, 'show']);
-		// Route::get('member',[MemberController::class, 'search']);
+		Route::get('member_search',[MemberController::class, 'search']);
 	});
 
 	// Route::get('member',[MemberController::class, 'index']);

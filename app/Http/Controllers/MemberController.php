@@ -183,30 +183,43 @@ class MemberController extends Controller
     {
         $search = $request->input('search');
 
-        //dd($search);
+        // $kawasan = Auth::user()->kodKawasanUser->kod_kawasan;
 
-        if($search != ""){
-            // $data = Member::whereHas('kodKawasan', function($q) use ($search){
-            //     $q->where('kod_kawasan','like', '%'.$search.'%');
-            // })->where(function ($query) use ($search){
-            //     $query->where('nama', 'like', '%'.$search.'%')
-            //     ->orWhere('no_hp', 'like', '%'.$search.'%')
-            //     ->orWhere('no_ahli_pas', 'like', '%'.$search.'%');
-            // })->paginate(10);
+        if (Auth::user()->hasRole('Admin')) {
+            if($search != ""){
 
-            $data = Member::whereHas('kodKawasan', function($q) use ($search){
-                $q->where('kod_kawasan','like', '%'.$search.'%');
-            })->orWhere(function ($query) use ($search){
-                    $query->where('nama', 'like', '%'.$search.'%')
-                    ->orWhere('no_hp', 'like', '%'.$search.'%')
-                    ->orWhere('no_ahli_pas', 'like', '%'.$search.'%');
-                })->paginate(10);
-            $data->appends(['search' => $search]);
-        }
-        else{
+                $data = Member::whereHas('kodKawasan', function($q) use ($search){
+                    $q->where('kod_kawasan','like', '%'.$search.'%');
+                })->orWhere(function ($query) use ($search){
+                        $query->where('nama', 'like', '%'.$search.'%')
+                        ->orWhere('no_hp', 'like', '%'.$search.'%')
+                        ->orWhere('no_ahli_pas', 'like', '%'.$search.'%');
+                    })->paginate(10);
+                $data->appends(['search' => $search]);
+            }
+            else{
+                $data = Member::paginate(10);
+            }
+        } elseif (Auth::user()->hasRole('Admin_Kawasan')){
+            if($search != ""){
+                $user = Auth::user();
+                $data = Member::whereHas('kodKawasan', function($q) use ($search, $user){
+                    $q->where('kod_kawasan','like', '%'.$search.'%');
+                    $q->where('id', $user->kod_kawasans_id);
+                })->orWhere(function ($query) use ($search){
+                        $query->where('nama', 'like', '%'.$search.'%')
+                        ->orWhere('no_hp', 'like', '%'.$search.'%')
+                        ->orWhere('no_ahli_pas', 'like', '%'.$search.'%');
+                    })->where('kod_kawasans_id',Auth::user()->kod_kawasans_id)->paginate(10);
+                $data->appends(['search' => $search]);
+            }
+            else{
+                $data = Member::where('kod_kawasans_id',Auth::user()->kod_kawasans_id)->paginate(10);
+            }
+        } else {
             $data = Member::paginate(10);
         }
-
+        
         return view('users.index',['members'=>$data]);
     }
 }
