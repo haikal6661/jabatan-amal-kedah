@@ -93,3 +93,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', UserController::class);
 });
 
+Route::get('/up', function() {
+    \Artisan::call('up');
+
+    return "up";
+});
+
+Route::get('/down', function() {
+    \Artisan::call('down --secret=1234');
+
+    return "down";
+});
+
